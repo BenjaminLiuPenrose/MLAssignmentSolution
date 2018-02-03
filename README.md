@@ -1,3 +1,3 @@
 # MLAssignmentSolution
 
-Benjamin solution to Maachine Learning class by Prof. Andrew Ng.
+Benjamin solution to Machine Learning class by Prof. Andrew Ng.
