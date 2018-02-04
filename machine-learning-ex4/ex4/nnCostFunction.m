@@ -62,11 +62,37 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Part 1
+y_K=zeros(m, num_labels);
+for k = 1 : num_labels
+    y_K(:,k)=(y==k);
+end
 
+%forward propagation
+Z_1=X; A_1=[ones(size(Z_1,1),1), Z_1];
+Z_2=A_1*Theta1'; A_2=[ones(size(Z_2,1),1), sigmoid(Z_2)];
+Z_3=A_2*Theta2'; A_3=sigmoid(Z_3); H=A_3;
 
+J=sum(sum(log(H).*y_K+(log(1-H)).*(1-y_K),2)); J=-J*1/m;
+J=J+lambda/(2*m)*(sum(sum(Theta1(:,2:end).^2,2))+sum(sum(Theta2(:,2:end).^2,2)));
 
+% Part 2
+Delta1=zeros(size(Theta1)); Delta2=zeros(size(Theta2));
+D1=zeros(size(Theta1)); D2=zeros(size(Theta2));
 
+delta3=A_3-y_K;
+delta2=delta3*Theta2.*sigmoidGradient([ones(size(Z_2,1),1), Z_2]);
+delta2=delta2(:,2:end);
+Delta1=delta2'*A_1;
+Delta2=delta3'*A_2;
+D1=Delta1./m;  D2=Delta2./m;
+%checkNNGradients();
 
+% Part 3
+
+D1(:,2:end)=D1(:,2:end)+Theta1(:,2:end).*(lambda/m);
+D2(:,2:end)=D2(:,2:end)+Theta2(:,2:end).*(lambda/m);
+Theta1_grad=D1; Theta2_grad=D2;
 
 
 
