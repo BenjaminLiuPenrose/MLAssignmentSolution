@@ -21,9 +21,15 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
+for i=1:size(idx,1)
+    dismin=(X(i,:)-centroids(1,:))*(X(i,:)-centroids(1,:))'; idx(i)=1;
+    for k=2:K
+        dis=(X(i,:)-centroids(k,:))*(X(i,:)-centroids(k,:))';
+        if (dis<dismin)
+            idx(i)=k; dismin=dis;
+        end
+    end
+end
 
 
 

@@ -12,8 +12,13 @@ centroids = zeros(K, size(X, 2));
 % Instructions: You should set centroids to randomly chosen examples from
 %               the dataset X
 %
+m=size(X, 1);
+initPt=randperm(m, K);
+for k=1: K
+    centroids(k,:)=X(initPt(k),:);
+end
 
-
+% centroids=X(initPt,:);
 
 
 

@@ -27,6 +27,10 @@ centroids = zeros(K, n);
 %
 
 
+for k=1:K
+    centroids(k,:)=(idx==k)'*X.*(1/sum(idx==k));
+end
+    
 
 
 

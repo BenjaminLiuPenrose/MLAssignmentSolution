@@ -20,6 +20,8 @@ S = zeros(n);
 %       number of examples).
 %
 
+Sigma=X'*X.*(1/m);
+[U, S, dummy]=svd(Sigma);
 
 
 
